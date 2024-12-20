@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روابط زياد جمال</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('https://cdn.pixabay.com/photo/2011/12/14/12/11/astronaut-11080_1280.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+        }
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px auto;
+            border: 3px solid #fff;
+            background: #fff;
+            overflow: hidden;
+        }
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: background 0.3s, transform 0.3s;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .link:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-5px);
+        }
+        .link i {
+            margin-right: 10px;
+        }
+
+        /* قائمة اللغات */
+        .language-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+            backdrop-filter: blur(5px); /* تأثير بلور */
+        }
+
+        .language-btn:hover {
+            background-color: #005bb5;
+        }
+
+        .language-menu {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .language-menu a {
+            color: #fff;
+            font-size: 1.1rem;
+            text-decoration: none;
+            padding: 8px 15px;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        .language-menu a:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* عند التفاعل مع الأيقونة */
+        .language-btn:focus + .language-menu, .language-btn:hover + .language-menu {
+            display: block;
+        }
+
+        /* نافذة منبثقة بتأثير بلور */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        .popup-content {
+            background: rgba(255, 255, 255, 0.9);
+            color: #000;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 80%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .popup-content h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        .popup-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* زر إغلاق بتنسيق الموقع */
+        .close-btn {
+            background: #0066cc;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-family: 'Cairo', sans-serif;
+            transition: background 0.3s;
+        }
+        .close-btn:hover {
+            background: #005bb5;
+        }
+
+        /* حركة ظهور النافذة */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* حركة اختفاء النافذة */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الأيقونة لتغيير اللغة -->
+    <div class="language-btn" onclick="toggleLanguageMenu()">
+        <i class="fas fa-language"></i>
+    </div>
+
+    <!-- قائمة اللغات -->
+    <div class="language-menu" id="language-menu">
+        <a href="javascript:void(0);" onclick="toggleLanguage('ar')">العربية</a>
+        <a href="javascript:void(0);" onclick="toggleLanguage('en')">English</a>
+    </div>
+
+    <div class="container">
+        <div class="profile-img">
+            <img src="me.jpg" alt="صورة زياد جمال">
+        </div>
+        <h1 id="title">روابط زياد جمال</h1>
+        <!-- أزرار السوشيال ميديا -->
+        <a href="https://t.me/almohrez" target="_blank" class="link">
+            <i class="fab fa-telegram"></i> <span id="telegram-text">تليجرام</span>
+        </a>
+        <a href="https://www.facebook.com/almohrez15" target="_blank" class="link">
+            <i class="fab fa-facebook"></i> <span id="facebook-text">فيسبوك</span>
+        </a>
+        <a href="https://www.instagram.com/elmohrez_" target="_blank" class="link">
+            <i class="fab fa-instagram"></i> <span id="instagram-text">إنستجرام</span>
+        </a>
+        <a href="https://music.apple.com/profile/almohrez" target="_blank" class="link">
+            <i class="fab fa-apple"></i> <span id="apple-music-text">أبل ميوزيك</span>
+        </a>
+        <a href="https://www.snapchat.com/add/b4_vo" target="_blank" class="link">
+            <i class="fab fa-snapchat"></i> <span id="snapchat-text">سناب شات</span>
+        </a>
+        <a href="https://www.tiktok.com/@pv_vo" target="_blank" class="link">
+            <i class="fab fa-tiktok"></i> <span id="tiktok-text">تيك توك</span>
+        </a>
+        <a href="https://discord.com/users/elmohrez" target="_blank" class="link">
+            <i class="fab fa-discord"></i> <span id="discord-text">ديسكورد</span>
+        </a>
+
+        <!-- زر "معلومات عني" -->
+        <a href="javascript:void(0);" class="link" onclick="showPopup()">
+            <i class="fas fa-user"></i> <span id="about-text">معلومات عني</span>
+        </a>
+    </div>
+
+    <!-- نافذة منبثقة للمعلومات -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2 id="about-title">معلومات عن زياد جمال</h2>
+            <p id="about-description">أنا زياد جمال، مبرمج مواقع ويب وبوتات تليجرام وواتساب. أعمل في مجال السوشيال ميديا، وأملك موقع المحرز لتزويد المتابعين وبيع خدمات السوشيال ميديا. يمكنك زيارة الموقع من خلال الرابط التالي: <a href="https://almohrez.store" target="_blank">المحرز</a>.</p>
+            <button class="close-btn" onclick="closePopup()">إغلاق</button>
+        </div>
+    </div>
+
+    <script>
+        let isArabic = true;
+        function toggleLanguage(language) {
+            isArabic = language === 'ar';
+            const textElements = {
+                title: document.getElementById('title'),
+                telegramText: document.getElementById('telegram-text'),
+                facebookText: document.getElementById('facebook-text'),
+                instagramText: document.getElementById('instagram-text'),
+                appleMusicText: document.getElementById('apple-music-text'),
+                snapchatText: document.getElementById('snapchat-text'),
+                tiktokText: document.getElementById('tiktok-text'),
+                discordText: document.getElementById('discord-text'),
+                aboutText: document.getElementById('about-text'),
+                aboutTitle: document.getElementById('about-title'),
+                aboutDescription: document.getElementById('about-description')
+            };
+
+            if (isArabic) {
+                textElements.title.innerText = 'زياد جمال';
+                textElements.telegramText.innerText = 'تليجرام';
+                textElements.facebookText.innerText = 'فيسبوك';
+                textElements.instagramText.innerText = 'إنستجرام';
+                textElements.appleMusicText.innerText = 'أبل ميوزيك';
+                textElements.snapchatText.innerText = 'سناب شات';
+                textElements.tiktokText.innerText = 'تيك توك';
+                textElements.discordText.innerText = 'ديسكورد';
+                textElements.aboutText.innerText = 'معلومات عني';
+                textElements.aboutTitle.innerText = 'معلومات عن زياد جمال';
+                textElements.aboutDescription.innerHTML = 'أنا زياد جمال، مبرمج مواقع ويب وبوتات تليجرام وواتساب. أعمل في مجال السوشيال ميديا، وأملك موقع المحرز لتزويد المتابعين وبيع خدمات السوشيال ميديا. يمكنك زيارة الموقع من خلال الرابط التالي: <a href="https://almohrez.store" target="_blank">المحرز</a>.';
+            } else {
+                textElements.title.innerText = 'Zeyad Gamal Links';
+                textElements.telegramText.innerText = 'Telegram';
+                textElements.facebookText.innerText = 'Facebook';
+                textElements.instagramText.innerText = 'Instagram';
+                textElements.appleMusicText.innerText = 'Apple Music';
+                textElements.snapchatText.innerText = 'Snapchat';
+                textElements.tiktokText.innerText = 'TikTok';
+                textElements.discordText.innerText = 'Discord';
+                textElements.aboutText.innerText = 'About Me';
+                textElements.aboutTitle.innerText = 'About Zeyad Gamal';
+                textElements.aboutDescription.innerHTML = 'I am Zeyad Gamal, a web developer and Telegram/WhatsApp bot creator. I work in social media and own the Almohrez platform for providing followers and selling social media services. You can visit the website here: <a href="https://almohrez.store" target="_blank">Almohrez</a>.';
+            }
+        }
+
+        // إظهار النافذة المنبثقة
+        function showPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // إظهار وإخفاء قائمة اللغات
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('language-menu');
+            menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+        }
+
+        // تغيير اللغة عند تحميل الصفحة
+        window.onload = function() {
+            toggleLanguage(isArabic ? 'ar' : 'en');
+        };
+    </script>
+</body>
+</html>
